@@ -1,3 +1,13 @@
 /* @tailwindcss postcss */
-@import "tailwindcss/preflight";
-@import "tailwindcss/utilities";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: sans-serif;
+}
+
+input {
+  border: 1px solid #ddd;
+  padding: 10px;
+}

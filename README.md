@@ -1,13 +1,13 @@
 # Project Setup Guide
 
-This guide provides step-by-step instructions to set up this repository locally on another laptop. Follow these steps to avoid the common configuration hassles.
+This guide provides step-by-step instructions to set up this repository locally on another laptop. Follow these steps to avoid common configuration hassles.
 
 ## Prerequisites
 Ensure you have the following installed before proceeding:
 
 - **Node.js**: [Download Node.js](https://nodejs.org/en/download/)
 - **Astro**: [Astro Documentation](https://docs.astro.build/en/getting-started/)
-- **Tailwind CSS**: [Tailwind Installation Guide](https://tailwindcss.com/docs/installation)
+- **Tailwind CSS (v3)**: [Tailwind Installation Guide](https://tailwindcss.com/docs/installation)
 - **React**: [React Documentation](https://react.dev/)
 
 ## Installation Steps
@@ -19,7 +19,7 @@ cd <repository-folder>
 ```
 
 ### 2️⃣ Install Dependencies
-Run the following command to install all required packages (This installs Astro, React, Tailwind CSS, and all required packages):
+Run the following command to install all required packages:
 ```sh
 npm install
 ```
@@ -57,9 +57,10 @@ http://localhost:4321/
 ```js
 import { defineConfig } from 'astro/config';
 import react from "@astrojs/react";
+import tailwind from "@astrojs/tailwind";
 
 export default defineConfig({
-    integrations: [react()],
+    integrations: [react(), tailwind()],
 });
 ```
 
@@ -67,7 +68,7 @@ export default defineConfig({
 ```js
 module.exports = {
   content: [
-    "./src/**/*.{html,js,astro}",
+    "./src/**/*.{html,js,astro}"
   ],
   theme: {
     extend: {},
@@ -80,7 +81,7 @@ module.exports = {
 ```js
 module.exports = {
   plugins: [
-    require('@tailwindcss/postcss'),
+    require('tailwindcss'),
     require('autoprefixer'),
   ],
 };
@@ -91,7 +92,7 @@ module.exports = {
 {
   "dependencies": {
     "@astrojs/react": "^4.2.0",
-    "@tailwindcss/postcss": "^4.0.3",
+    "@astrojs/tailwind": "^6.0.0",
     "astro": "^5.2.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
@@ -99,13 +100,13 @@ module.exports = {
   "devDependencies": {
     "autoprefixer": "^10.4.20",
     "postcss": "^8.5.1",
-    "tailwindcss": "^4.0.3"
+    "tailwindcss": "^3.4.1"
   }
 }
 ```
 
 ## Troubleshooting
-- **If styles don’t apply**: Ensure `@tailwindcss/postcss` is installed and configured correctly.
+- **If styles don’t apply**: Ensure Tailwind CSS is installed as v3.x and `@astrojs/tailwind` is included in `astro.config.mjs`.
 - **If React integration fails**: Verify that `@astrojs/react` is properly installed and included in `astro.config.mjs`.
 - **For TypeScript issues**: Check the `tsconfig.json` file and ensure `astro/tsconfigs/strict` is included.
 
