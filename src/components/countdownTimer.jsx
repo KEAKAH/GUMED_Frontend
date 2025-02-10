@@ -1,17 +1,10 @@
 import { useState, useEffect } from "react";
 
-export default function CountdownTimer() {
-  const targetDate = new Date("2024-03-01T00:00:00").getTime(); // Update to actual start date
-
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
-
-  function calculateTimeLeft() {
-    const now = new Date().getTime();
-    const difference = targetDate - now;
-
-    if (difference <= 0) {
-      return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-    }
+const CountdownTimer = () => {
+  const getTimeLeft = () => {
+    const now = new Date();
+    const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59);
+    const difference = endOfMonth.getTime() - now.getTime();
 
     return {
       days: Math.floor(difference / (1000 * 60 * 60 * 24)),
@@ -19,16 +12,26 @@ export default function CountdownTimer() {
       minutes: Math.floor((difference / (1000 * 60)) % 60),
       seconds: Math.floor((difference / 1000) % 60),
     };
-  }
+  };
+
+  const [timeLeft, setTimeLeft] = useState(getTimeLeft());
 
   useEffect(() => {
-    const timer = setInterval(() => setTimeLeft(calculateTimeLeft()), 1000);
+    const timer = setInterval(() => {
+      setTimeLeft(getTimeLeft());
+    }, 1000);
+
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <div className="mt-4 text-xl font-bold text-black">
-      {timeLeft.days} DAYS : {timeLeft.hours} HOURS : {timeLeft.minutes} MIN : {timeLeft.seconds} SECS
+    <div className="mt-4 text-2xl font-bold text-orange-600">
+      <span>{timeLeft.days}d </span>
+      <span>{timeLeft.hours}h </span>
+      <span>{timeLeft.minutes}m </span>
+      <span>{timeLeft.seconds}s</span>
     </div>
   );
-}
+};
+
+export default CountdownTimer;

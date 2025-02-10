@@ -12,7 +12,7 @@ import "../styles/main.css";
 </head>
 <body class="bg-white text-gray-900">
   <header class="p-4 flex justify-between items-center border-b">
-    <img src="/logo.png" alt="University Logo" class="h-12">
+    <img src="/gumed_logo.png" alt="University Logo" class="h-12">
     <button class="bg-orange-500 text-white px-4 py-2 rounded-md">Sign in</button>
   </header>
 
@@ -23,7 +23,7 @@ import "../styles/main.css";
     <p class="text-gray-600 mt-2">We are not accepting applications at this time. Please check back in:</p>
 
     <!-- Countdown Timer -->
-    <CountdownTimer />
+    <CountdownTimer client:only="react" />
 
     <!-- Form -->
     <form class="mt-6 space-y-4 w-full max-w-md">
